@@ -1,2 +1,2 @@
 FROM tomcat9
-Copy newp1/target/*.war /var/lib/tomcat9/webapps
+Copy /var/lib/jenkins/workspace/newp1/target/*.war /var/lib/tomcat9/webapps
