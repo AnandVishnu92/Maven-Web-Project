@@ -26,10 +26,17 @@ node {
                 docker build -t maven-web-app .
                 aws ecr get-login-password --region us-east-1 | \
                 docker login --username AWS --password-stdin ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com
-                docker tag maven-web-app ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/maven-web-app
-                docker push ACCOUNT_ID.dkr.ecr.ap-south-1.amazonaws.com/maven-web-app
+                docker tag maven-web-app:latest 826854139561.dkr.ecr.us-east-1.amazonaws.com/maven-web-app:latest
+                docker push 826854139561.dkr.ecr.us-east-1.amazonaws.com/maven-web-app:latest
+                
                 EOF
                 '''
             }
+         }
+  stage('Deploy to EKS') {
+            steps {
+                sh 'kubectl apply -f deployment.yaml'
+            }
+     }
+   }
 }
-  
